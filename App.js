@@ -25,7 +25,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "Home Tela" }}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
