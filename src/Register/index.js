@@ -21,6 +21,7 @@ import {
   IconView,
   IconDesign,
 } from "./styles";
+import LogoEnterprise from "../../components/ImageLogo";
 const TouchableOpacity = Animatable.createAnimatableComponent(TouchButtons);
 
 const { width, height } = Dimensions.get("window");
@@ -42,14 +43,14 @@ export default function Register({ navigation }) {
   }, []);
 
   const _keyboardDidShow = () => {
-    setBorder("#fff");
+    return setBorder("#fff");
   };
   const _keyboardDidHide = () => {
     setBorder(null);
   };
 
   const handleColor = () => {
-    if (count <= 8) {
+    if (count <= 14) {
       setCount(count + 1);
     } else {
       setCount(0);
@@ -59,24 +60,35 @@ export default function Register({ navigation }) {
       case 1:
         return setChange("orange");
       case 2:
-        return setChange("cyan");
-      case 3:
         return setChange("#343434");
+      case 3:
+        return setChange("#e5989b");
       case 4:
-        return setChange("#993399");
-
+        return setChange("#f28482");
       case 5:
-        return setChange("#F5E70B");
+        return setChange("#eae2b7");
       case 6:
-        return setChange("#D68910");
+        return setChange("#f4acb7");
       case 7:
-        return setChange("#229954");
+        return setChange("#52796f");
       case 8:
-        return setChange("blue");
+        return setChange("#240046");
       case 9:
+        return setChange("#ff5d8f");
+      case 10:
+        return setChange("#993399");
+      case 11:
+        return setChange("#F5E70B");
+      case 12:
+        return setChange("#D68910");
+      case 13:
+        return setChange("#229954");
+      case 14:
+        return setChange("blue");
+      case 15:
         return setChange("#FF00FF");
       default:
-        return setChange("#53e431");
+        return setChange("cyan");
     }
   };
   const handleLogin = () => {
@@ -109,10 +121,16 @@ export default function Register({ navigation }) {
             snapToInterval={width}
             decelerationRate="fast"
             bounces={false}
+            showsHorizontalScrollIndicator={false}
           >
             {/* create logo Enterprise */}
-            <LogoBusiness />
-            {/* create logo Enterprise */}
+            {!border ? (
+              <LogoEnterprise />
+            ) : (
+              <Animatable.View animation="zoomOut" duration={1500}>
+                <LogoEnterprise />
+              </Animatable.View>
+            )}
           </ViewScrollColor>
         </ViewColor>
       </>
@@ -142,7 +160,7 @@ export default function Register({ navigation }) {
               name="email-edit-outline"
               size={20}
               style={{ top: 10, marginRight: 5 }}
-              color={change ? change : "cyan"}
+              color={change ? change : "#000"}
             />
             <Input placeholder="E-mail" underlineColorAndroid="transparent" />
           </ViewInput>
@@ -152,7 +170,7 @@ export default function Register({ navigation }) {
               name="lock-outline"
               size={20}
               style={{ top: 10, marginRight: 5 }}
-              color={change ? change : "cyan"}
+              color={change ? change : "#000"}
             />
             <Input
               placeholder="Password"
@@ -165,14 +183,14 @@ export default function Register({ navigation }) {
               <TouchableOpacity
                 color={change}
                 animation="zoomIn"
-                duration={2500}
+                duration={1000}
                 onPress={() => handleRegister()}
               >
                 <ViewNameIcon>
                   <LoginText>Registrar</LoginText>
                   {!login ? (
                     <IconView>
-                      <AntDesign name="arrowright" size={24} color="white" />
+                      <AntDesign name="arrowright" size={20} color="white" />
                     </IconView>
                   ) : (
                     <IconView>
@@ -186,7 +204,7 @@ export default function Register({ navigation }) {
             <ButtonTouch>
               <TouchableOpacity
                 animation="zoomIn"
-                duration={2500}
+                duration={1000}
                 style={{ backgroundColor: "blue" }}
                 onPress={() => handleLogin()}
               >

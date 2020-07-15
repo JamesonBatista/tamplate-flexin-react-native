@@ -20,7 +20,7 @@ const Container = styled.SafeAreaView`
 `;
 const ViewColorTwo = styled.View`
   flex: 1;
-  background-color: ${(props) => (props.color ? props.color : "cyan")};
+  background-color: ${(props) => (props.color ? props.color : "#000")};
 `;
 
 const ViewColor = styled.TouchableOpacity`
@@ -43,14 +43,14 @@ const ViewScrollColor = styled.ScrollView`
   border-bottom-right-radius: 75px;
   border-top-right-radius: 75px;
   margin-top: 5px;
-  background-color: ${(props) => (props.color ? props.color : "cyan")};
+  background-color: ${(props) => (props.color ? props.color : "#000")};
 `;
 const LogoBusiness = styled.View`
-  align-self: center;
+  margin: 0px 40px;
 `;
 const ViewInput = styled.View`
   border-width: 1px;
-  border-color: ${(props) => (props.color ? props.color : "cyan")};
+  border-color: ${(props) => (props.color ? props.color : "#000")};
   width: 90%;
   height: 40px;
   border-radius: 20px;
@@ -61,6 +61,8 @@ const ViewInput = styled.View`
 `;
 const Input = styled.TextInput`
   width: 90%;
+  font-size: 20px;
+  letter-spacing: 0.7px;
 `;
 const ContainerButtons = styled.View`
   flex-direction: row;
@@ -75,7 +77,7 @@ const ButtonTouch = styled.View`
   margin-right: 5px;
 `;
 const TouchButtons = styled.TouchableOpacity`
-  background-color: ${(props) => (props.color ? props.color : "cyan")};
+  background-color: ${(props) => (props.color ? props.color : "#000")};
   width: 150px;
   height: 40px;
   border-radius: 20px;
@@ -96,7 +98,13 @@ const LoginText = styled.Text`
 `;
 const RegisterText = styled.Text``;
 
+const ImageLogo = styled.Image`
+  width: 300px;
+  height: 300px;
+`;
+
 export {
+  ImageLogo,
   ViewColorBottom,
   ViewColorTwo,
   ViewColor,

@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Dimensions, StatusBar, View, Keyboard } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Dimensions,
+  StatusBar,
+  View,
+  Keyboard,
+  Text,
+  Animated,
+} from "react-native";
 import * as Animatable from "react-native-animatable";
 import { MaterialCommunityIcons, MaterialIcons, AntDesign } from "../../icons";
 import Loader from "../../components/Loader";
 import {
   ViewColor,
   ViewScrollColor,
-  LogoBusiness,
   Container,
   ViewColorTwo,
   ViewColorBottom,
@@ -20,7 +26,9 @@ import {
   IconArrow,
   IconView,
   IconCheck,
+  ImageLogo,
 } from "./styles";
+import LogoEnterprise from "../../components/ImageLogo";
 const TouchableOpacity = Animatable.createAnimatableComponent(TouchButtons);
 
 const { width, height } = Dimensions.get("window");
@@ -30,6 +38,7 @@ export default function Login({ navigation }) {
   const [login, setLogin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [border, setBorder] = useState(false);
+  const [email, setEmail] = useState(null);
 
   useEffect(() => {
     Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
@@ -42,7 +51,7 @@ export default function Login({ navigation }) {
   }, []);
 
   const _keyboardDidShow = () => {
-    setBorder("#fff");
+    return setBorder("#fff");
   };
 
   const _keyboardDidHide = () => {
@@ -50,7 +59,7 @@ export default function Login({ navigation }) {
   };
 
   const handleColor = () => {
-    if (count <= 8) {
+    if (count <= 14) {
       setCount(count + 1);
     } else {
       setCount(0);
@@ -60,23 +69,35 @@ export default function Login({ navigation }) {
       case 1:
         return setChange("orange");
       case 2:
-        return setChange("cyan");
+        return setChange("#343434");
       case 3:
-        return setChange("#000");
+        return setChange("#e5989b");
       case 4:
-        return setChange("#993399");
+        return setChange("#f28482");
       case 5:
-        return setChange("#F5E70B");
+        return setChange("#eae2b7");
       case 6:
-        return setChange("#D68910");
+        return setChange("#f4acb7");
       case 7:
-        return setChange("tomato");
+        return setChange("#52796f");
       case 8:
-        return setChange("blue");
+        return setChange("#240046");
       case 9:
+        return setChange("#ff5d8f");
+      case 10:
+        return setChange("#993399");
+      case 11:
+        return setChange("#F5E70B");
+      case 12:
+        return setChange("#D68910");
+      case 13:
+        return setChange("#229954");
+      case 14:
+        return setChange("blue");
+      case 15:
         return setChange("#FF00FF");
       default:
-        return setChange("#53e431");
+        return setChange("cyan");
     }
   };
 
@@ -95,10 +116,20 @@ export default function Login({ navigation }) {
             snapToInterval={width}
             decelerationRate="fast"
             bounces={false}
+            showsHorizontalScrollIndicator={false}
           >
             {/* create logo Enterprise */}
-            <LogoBusiness />
-            {/* create logo Enterprise */}
+            {!border ? (
+              <LogoEnterprise email={email} />
+            ) : (
+              <Animatable.View
+                animation="zoomOut"
+                duration={1500}
+                // style={{ opacity: !border ? fadeAnim : 0 }}
+              >
+                <LogoEnterprise email={email} />
+              </Animatable.View>
+            )}
           </ViewScrollColor>
         </ViewColor>
       </>
@@ -126,12 +157,13 @@ export default function Login({ navigation }) {
               name="email-edit-outline"
               size={20}
               style={{ top: 10, marginRight: 5 }}
-              color={change ? change : "cyan"}
+              color={change ? change : "#000"}
             />
             <Input
               placeholder="E-mail"
               underlineColorAndroid="transparent"
               onSubmitEditing={() => Keyboard.dismiss}
+              onChangeText={(text) => setEmail(text)}
             />
           </ViewInput>
 
@@ -140,7 +172,7 @@ export default function Login({ navigation }) {
               name="lock-outline"
               size={20}
               style={{ top: 10, marginRight: 5 }}
-              color={change ? change : "cyan"}
+              color={change ? change : "#000"}
             />
             <Input
               placeholder="Password"
